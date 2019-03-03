@@ -1,0 +1,25 @@
+{
+  "name": "api-dev-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client/index.html",
+  "scripts": {
+    "api": "babel-node src/server.js",
+    "start": "nodemon -w src -x \"npm run api\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bookshelf": "^0.14.2",
+    "dotenv": "^6.2.0",
+    "hapi": "^18.1.0",
+    "knex": "^0.13.0",
+    "mysql": "^2.16.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.4",
+    "nodemon": "^1.18.10"
+  }
+}
