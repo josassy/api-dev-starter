@@ -6,10 +6,8 @@ export default {
     return User
       .where('id', encodeURIComponent(request.params.id))
       .fetch({ withRelated: ['accessLevel'] })
-      .then(function(user) {
-        return user.toJSON();
-      })
-      .catch(function(err) {
+      .then(user => user.toJSON())
+      .catch(err => {
         console.error(err);
       });
   },
@@ -23,7 +21,7 @@ export default {
     return UserPassword
       .where('username', username)
       .fetch()
-      .then(function(user) {
+      .then((user) => {
         if (!user) {
           return false;
         }
@@ -36,7 +34,7 @@ export default {
           return false;
         }
       })
-      .catch(function(err) {
+      .catch(err => {
         console.error(err);
       });
   }

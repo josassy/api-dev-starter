@@ -1,4 +1,5 @@
 import UserController from './user/controller';
+import AccessController from './access-level/controller';
 
 const ApiRoutes = [
   {
@@ -17,6 +18,11 @@ const ApiRoutes = [
     method: 'GET',
     path: '/user/{id}',
     handler: UserController.get
+  },
+  {
+    method: 'GET',
+    path: '/access-level/{id}',
+    handler: AccessController.get
   }
 ];
 

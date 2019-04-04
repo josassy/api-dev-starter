@@ -7,7 +7,7 @@ export default {
       encodeURIComponent(request.params.id)
     ).fetch().then(function(accessLevel) {
       return accessLevel.toJSON();
-    }).catch(function(err) {
+    }).catch((err) => {
       console.error(err);
     });
   }
