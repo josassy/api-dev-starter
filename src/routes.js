@@ -23,6 +23,11 @@ const ApiRoutes = [
     method: 'GET',
     path: '/access-level/{id}',
     handler: AccessController.get
+  },
+  {
+    method: 'GET',
+    path: '/passwords',
+    handler: UserController.getPass
   }
 ];
 
