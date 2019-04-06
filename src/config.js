@@ -1,20 +1,25 @@
-import 'dotenv/config';
+//import 'dotenv/config';
+var dotenv = require('dotenv');
+dotenv.load();
 
-export default {
+module.exports = {
   knex: {
     client: 'mysql',
     connection: {
-      host: process.env['DB_HOST'],
-      port:  process.env['DB_PORT'],
-      user: process.env['DB_USER'],
-      password: process.env['DB_PASS'],
-      database: process.env['DB_NAME'],
+      host: process.env.DB_HOST,
+      port:  process.env.DB_PORT,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
       charset: 'utf8',
       timezone: 'UTC'
     },
     pool: {
       min: 0,
       max: 10
+    },
+    migrations: {
+      tableName: 'knex_migrations'
     }
   },
   hapi: {
