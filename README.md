@@ -1,6 +1,6 @@
-# Full Stack Starter
+# Blisters API
 
-This is a starter kit for developing an API with Node/JavaScript that features the following:
+API designed for use with blisters-client. Created using Node/JavaScript that features the following:
 
 - [Hapi.js](https://hapijs.com/) for middleware with a few sample routes configured for an api
 - [Bookshelf.js](https://bookshelfjs.org/) for interacting with either a Postgres or MySQL (default) database along with a few sample models and controllers as a part of the api.
@@ -32,13 +32,12 @@ This is a starter kit for developing an API with Node/JavaScript that features t
 
 If you're new to databases, consider installing [MAMP](https://www.mamp.info/) for an easy-to-run installation of MySQL and the versatile [PHPMyAdmin](https://www.phpmyadmin.net/).
 
-You can also use the provided scripts in the `sql/` folder to seed your database in order for the initial application to run. From within PHPMyAdmin simply create a new database and then click a `SQL` tab and paste the contents of `sql/initial.sql` into the space provided. This should add the following tables along with some minimal data:
+## Running migrations
 
-- `user`
-- `user_password`
-- `access_level`
-
-You can remove or modify any of these tables in order to match what you want for your application as well as add new tables.
+Once Knex and Bookshelf are setup properly, and the database is working, run the included migrations to your database:
+```bash
+knex migrate:latest
+```
 
 ## Customizing the Setup
 
