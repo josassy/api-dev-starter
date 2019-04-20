@@ -1,10 +1,10 @@
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('task_types').del()
+  return knex('task_type').del()
     .then(function () {
       // Inserts seed entries
-      return knex('task_types').insert([
+      return knex('task_type').insert([
         {
           name: 'Normal',
           alias: 'type-norm',
