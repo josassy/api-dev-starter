@@ -47,14 +47,74 @@ knex migrate:latest
 
 Creates a new task. Accepts following values in JSON:
 
-##### Required:
+##### Required
 * owner : int (references valid user)
 * category : int (references valid category)
 * taskType : int (references valid taskType)
 
-##### Optional:
+##### Optional
 * description : string
 * dueDate : date
 * status : bool
+
+Return: Newly created tasks in JSON
+
+#### GET /task/{id}
+
+Gets an existing task.
+
+Return: Task in JSON
+
+#### GET /task
+
+Gets all existing tasks.
+
+Return: Array of Task in JSON
+
+#### PATCH /task/{id}
+
+Updates an existing task. Can update any or all fields listed under POST /task.
+
+Return: Edited task in JSON
+
+#### DELETE /task/{id}
+
+Deletes an existing task.
+
+Return: Empty JSON
+
+### Categories
+
+#### POST /category
+
+Creates a new category. Accepts following values in JSON:
+
+##### Required
+* name : string
+* owner : int (references valid user)
+
+#### GET /category/{id}
+
+Gets an existing category.
+
+Return: Category in JSON
+
+#### GET /category
+
+Gets all existing categories.
+
+Return: Array of Category in JSON
+
+#### PATCH /category/{id}
+
+Updates an existing category. Can update any or all fields listed under POST /task.
+
+Return: Edited task in JSON
+
+#### DELETE /task/{id}
+
+Deletes an existing task.
+
+Return: Empty JSON
 
 Have fun!
