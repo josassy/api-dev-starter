@@ -1,31 +1,34 @@
 import Task from './model';
+import PropHelper from '../prop-helper';
+
+const expectedProps = [ 'owner', 'description', 'dueDate', 'category', 'taskType', 'status' ];
 
 export default {
 
   // CREATE
 
   create(request, h) {
-    var payload = request.payload;
+    let payload = request.payload;
+    let props = PropHelper.addProps(payload, expectedProps);
+
     // TODO: Add default values
-    return Task.forge ({
-      owner: payload.owner,
-      description: payload.description,
-      dueDate: payload.dueDate,
-      category: payload.category,
-      taskType: payload.taskType,
-      status: payload.status
-    }).save()
-    .then(task => task.toJSON())
-    .catch(err => {
-      console.error(err);
-    });
+    return Task
+      .forge(props)
+      .save()
+      .then(task => task.toJSON())
+      .catch(err => {
+        console.error(err);
+      });
   },
 
   // READ
 
   get(request, h) {
+
+    let id = encodeURIComponent(request.params.id);
+
     return Task
-      .where('id', encodeURIComponent(request.params.id))
+      .where('id', id)
       .fetch({ withRelated: ['taskType', 'category']})
       .then(task => task.toJSON())
       .catch(err => {
@@ -42,23 +45,14 @@ export default {
     }
 
     return Task
-      .forge()
-      .where((qb) => {
-        if (JSON.parse(q.filterIncomplete)) {
-          qb.where({status: !q.filterIncomplete});
-        }
+      .where(
+        (qb) => {
+          if (JSON.parse(q.filterIncomplete)) {
+            qb.where({status: !q.filterIncomplete});
+          }
       })
       .orderBy('dueDate', 'ASC')
       .fetchAll({ withRelated: ['taskType', 'category']})
-      // .then(tasks => {
-      //   if (q.filterIncomplete) {
-      //     tasks = tasks.where('status', false);
-      //   }
-      //   if (q.filterCategory) {
-      //     tasks = tasks.where('category.name', q.filterCategory);
-      //   }
-      //   return tasks.toJSON();
-      // })
       .then(tasks => tasks.toJSON())
       .catch(err => {
         console.error(err);
@@ -67,18 +61,21 @@ export default {
 
   // UPDATE
   update(request, h) {
-    var payload = request.payload
-    return Task.forge({ id: request.params.id })
-      .save({
-        owner: payload.owner,
-        description: payload.description,
-        dueDate: payload.dueDate,
-        category: payload.category,
-        taskType: payload.taskType,
-        status: payload.status,
-      },
-      { method: 'update' })
-      .then(task => task.toJSON())
+    let payload = request.payload;
+    let id = encodeURIComponent(request.params.id);
+    let props = PropHelper.addProps(payload, expectedProps);
+    return Task
+      .forge({ id: id })
+      .save(props, { method: 'update' })
+      .then((task) => {
+        return Task
+          .where('id', task.id)
+          .fetch({ withRelated: ['taskType', 'category']})
+          .then(task => task.toJSON())
+          .catch(err => {
+            console.error(err);
+          });
+      })
       .catch(err => {
         console.error(err);
       });
@@ -86,8 +83,11 @@ export default {
 
   // DELETE
   delete(request, h) {
+
+    let id = encodeURIComponent(request.params.id);
+
     return Task
-      .where('id', encodeURIComponent(request.params.id))
+      .where('id', id)
       .destroy()
       .then(task => task.toJSON())
       .catch(err => {

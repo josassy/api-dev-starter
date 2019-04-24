@@ -1,6 +1,6 @@
 import TaskController from './task/controller';
-// import UserController from './user/controller';
-// import AccessController from './access-level/controller';
+import CategoryController from './category/controller';
+
 
 const ApiRoutes = [
   {
@@ -36,9 +36,34 @@ const ApiRoutes = [
     method: 'DELETE',
     path: '/task/{id}',
     handler: TaskController.delete
-  }
+  },
 
-  
+  // CATEGORIES
+  {
+    method: 'POST',
+    path: '/category',
+    handler: CategoryController.create
+  },
+  {
+    method: 'GET',
+    path: '/category/{id}',
+    handler: CategoryController.get
+  },
+  {
+    method: 'GET',
+    path: '/categories',
+    handler: CategoryController.getAll
+  },
+  {
+    method: 'PATCH',
+    path: '/category/{id}',
+    handler: CategoryController.update
+  },
+  {
+    method: 'DELETE',
+    path: '/category/{id}',
+    handler: CategoryController.delete
+  }
 ];
 
 export default ApiRoutes;
