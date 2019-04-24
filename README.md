@@ -39,16 +39,22 @@ Once Knex and Bookshelf are setup properly, and the database is working, run the
 knex migrate:latest
 ```
 
-## Customizing the Setup
+## API endpoints
 
-In order to jump in and start customizing the application boilerplate a quick overview of the files in the `src` folder may be helpful:
+### Tasks
 
-- `config.js` contains a mapping of settings for the `knex` database connection. These primarily come from the `.env` environment file but contain a few other settings you can customize further. See the Bookshelf and Knex documentation. This file is imported elsewhere so it can be used as a centralized house for configurations throughout the application.
-- `database.js` contains settings and instantiation of the Bookshelf and Knex database objects. It should not need any customization other than perhaps adjusting plugins being used for your Bookshelf setup. This is included throughout the application wherever the Bookshelf library is needed.
-- `server.js` is the core server setup for the Hapi middleware that runs the api. Here we provide some initial server configurations including the port on which the api runs and some CORS settings. Adjust these as needed.
-- `routes` is used where we set up the various endpoints for the api using the Hapi route configuration object. For each endpoint identify the path, the method, and a handler function. Typically, the handlers should be tied closely to a controller method for a particular database entity. For example, in the starter set, we've imported the `UserController` and used its `get` and `getAuth` methods as handlers for the `/user/{id}` and `/login` endpoints, respectively. Add or modify routes as needed.
-- model folders such as `access-level` and `user` contain at least a `model.js` and usually also a `controller.js`.
-  - `model.js` -- this contains the Bookshelf object setup for a given entity.
-  - `controller.js` -- This contains logic for interacting with the database in meaningful ways and provides methods that can be used as handlers for route endpoints. It is only needed to facilitate such interactions and may be omitted when these are not needed, as in the case of the `user/password/` entity.
+#### POST /task
+
+Creates a new task. Accepts following values in JSON:
+
+##### Required:
+* owner : int (references valid user)
+* category : int (references valid category)
+* taskType : int (references valid taskType)
+
+##### Optional:
+* description : string
+* dueDate : date
+* status : bool
 
 Have fun!
