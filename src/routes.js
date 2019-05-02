@@ -1,6 +1,6 @@
 import TaskController from './task/controller';
+import TaskTypeController from './task_type/controller';
 import CategoryController from './category/controller';
-
 
 const ApiRoutes = [
   {
@@ -36,6 +36,18 @@ const ApiRoutes = [
     method: 'DELETE',
     path: '/task/{id}',
     handler: TaskController.delete
+  },
+
+  // TASK TYPES
+  {
+    method: 'GET',
+    path: '/task-type/{id}',
+    handler: TaskTypeController.get
+  },
+  {
+    method: 'GET',
+    path: '/task-types',
+    handler: TaskTypeController.getAll
   },
 
   // CATEGORIES

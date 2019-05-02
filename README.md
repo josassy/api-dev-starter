@@ -57,31 +57,45 @@ Creates a new task. Accepts following values in JSON:
 * dueDate : date
 * status : bool
 
-Return: Newly created tasks in JSON
+**Return:** Newly created tasks in JSON
 
 #### GET /task/{id}
-
 Gets an existing task.
 
-Return: Task in JSON
 
-#### GET /task
+**Return:** Task in JSON
+
+#### GET /tasks
 
 Gets all existing tasks.
 
-Return: Array of Task in JSON
+**Return:** Array of Task in JSON
 
 #### PATCH /task/{id}
 
 Updates an existing task. Can update any or all fields listed under POST /task.
 
-Return: Edited task in JSON
+**Return:** Edited task in JSON
 
 #### DELETE /task/{id}
 
 Deletes an existing task.
 
-Return: Empty JSON
+**Return:** Empty JSON
+
+### Task Types
+
+#### GET /task-type/{id}
+
+Gets a task type by id.
+
+**Return:** Task type in JSON
+
+#### GET /task-types
+
+Gets all task types.
+
+**Return:** Array of task types in JSON
 
 ### Categories
 
@@ -93,28 +107,28 @@ Creates a new category. Accepts following values in JSON:
 * name : string
 * owner : int (references valid user)
 
+**Return:** Newly created category in JSON
+
 #### GET /category/{id}
 
 Gets an existing category.
 
-Return: Category in JSON
+**Return:** Category in JSON
 
 #### GET /category
 
 Gets all existing categories.
 
-Return: Array of Category in JSON
+**Return:** Array of Category in JSON
 
 #### PATCH /category/{id}
 
 Updates an existing category. Can update any or all fields listed under POST /task.
 
-Return: Edited task in JSON
+**Return:** Edited task in JSON
 
 #### DELETE /task/{id}
 
 Deletes an existing task.
 
-Return: Empty JSON
-
-Have fun!
+**Return:** Empty JSON
